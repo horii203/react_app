@@ -1,21 +1,28 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import { string } from 'prop-types';
+import { string, shape } from 'prop-types';
 
 export default function CircleButton(props) {
-    const { children } = props;
+    const { children, style } = props;
     return (
-        <View style={styles.circleBottom}>
+        //メモ一覧画面とメモ詳細画面でボタンの位置が違うのでstyleを上書く
+        <View style={[styles.circleBottom, style]}>
             {/* ボタンの＋－をApp.jsxで切り替え */}
           <Text style={styles.circleBottomLabel}>{ children }</Text>
         </View>
     );
 };
 
-// CircleButton利用時にchildrenの値は必須
+
 CircleButton.propTypes = {
+    // CircleButton利用時にchildrenの値は必須
     children: string.isRequired,
+    styles: shape(),
 };
+
+CircleButton.defaultProps = {
+  styles: null
+}
 
 const styles = StyleSheet.create({
     
